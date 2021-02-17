@@ -7,9 +7,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 class ArticleController extends Controller
 {
-    public function view(Request $request, Response $response)
+    public function view(Request $request, Response $response
+        )
     {
-    	$article = $this->ci->get('db')->find('App\Entity\Article', 1);
-        return $this->renderPage($response, 'article.html',['article' => $article]);
+        $article = $this->ci->get('db')->find('
+            App\Entity\Article', 1);
+        return $this->renderPage($response, 'article.html', [
+            'article' => $article
+        ]);
+
     }
 }

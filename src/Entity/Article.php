@@ -66,7 +66,6 @@ class Article {
 	public function setImage($value){
 		$this->image = $value;
 	}
-
 	public function getBody(){
 		return $this->body;
 	}
@@ -79,9 +78,7 @@ class Article {
 		return $this->published;
 	}
 
-	public function setPublished(DateTime 
-		$value = null){
+	public function setPublish(DateTime $value = null){
 		$this->published = $value;
 	}
-
 }
