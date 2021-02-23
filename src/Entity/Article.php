@@ -34,13 +34,11 @@ class Article {
 	* @Column(type="datetime")
 	*/
 	private $published;
-
+	
 	/**
-	* @ManyToOne(targetEntity="Author", inversedBy = "articles")
+	* @ManyToOne(targetEntity="Author", inversedBy="articles")
 	*/
-
 	private $author;
-
 
 	public function getId(){
 		return $this->id;
@@ -73,6 +71,7 @@ class Article {
 	public function setImage($value){
 		$this->image = $value;
 	}
+
 	public function getBody(){
 		return $this->body;
 	}
@@ -85,7 +84,8 @@ class Article {
 		return $this->published;
 	}
 
-	public function setPublish(DateTime $value = null){
+	public function setPublished(DateTime 
+		$value = null){
 		$this->published = $value;
 	}
 

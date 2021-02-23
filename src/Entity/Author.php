@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Entity;
 
-use Doctrine\Common\Collection\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
 * @Entity
 */
@@ -20,8 +20,8 @@ class Author {
 	private $name;
 
 	/**
-	*@OneToMany(targetEntity="Article", mappedBy="author")
-	*@OrderBy ({"published" = "DESC"})
+	* @OneToMany(targetEntity="Article", mappedBy="author")
+	* @OrderBy({"published" = "DESC"})
 	*/
 	private $articles;
 
