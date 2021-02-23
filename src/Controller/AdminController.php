@@ -54,8 +54,17 @@ public function create(Request $request, Response $response, $args = [])
             throw new HttpNotFoundException($request);
         }
 
-
         if(request->isPost()){ 
+            
+            if($request->getParam('action') == 'delete') {
+                $this->ci->get('db') -> remove($article);
+                $this ->ci->get('db')->flush();
+
+                return $response->withRedirect('/admin');
+            }
+
+
+
             $article->setName($request->$getParam('name'));
             $article->setSlug($request->$getParam('slug'));
             $article->setImage($request->$getParam('image'));
