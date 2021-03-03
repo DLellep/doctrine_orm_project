@@ -8,6 +8,7 @@ use Slim\Exception\HttpNotFoundException;
 
 class ArticleController extends Controller
 {
+    // View with QueryBuilder
     public function view(Request $request, Response $response, $args = [])
     {
         $qb = $this->ci->get('db')->createQueryBuilder();
@@ -21,23 +22,30 @@ class ArticleController extends Controller
 
         $article = $query->getSingleResult();
 
-        return $this->renderPage($response, 'article.html', ['article' => $article]);
+        return $this->renderPage($response, 'article.html', [
+            'article' => $article,
+            'tags' => $article->getTags()
+        ]);
     }
 
+    // View with repository
     public function viewRP(Request $request, Response $response, $args = [])
     {
-        $article = $this->ci->get('db')->getRepository('App\Entity\Article')->findOneBy(['slug' => $args['slug']]);
-        
-        if(!$article){
+        $article = $this->ci->get('db')->getRepository('App\Entity\Article')->findOneBy([
+                'slug' => $args['slug']
+        ]);
+
+        if(!$article) {
             throw new HttpNotFoundException($request);
         }
 
-        return $this->renderPage($response, 'article.html', ['article' => $article]);
+        return $this->renderPage($response, 'article.html', ['article' => $article, 'tags' => $tags]);
     }
 
+    // View with primary key
     public function viewPK(Request $request, Response $response)
     {
-        $article = $this->ci->get('db')->find('App\Entity\Article', 1);
+        $article = $this->ci->get('db')->find('App\Entity\Article', 1); 
         return $this->renderPage($response, 'article.html', ['article' => $article]);
     }
 }

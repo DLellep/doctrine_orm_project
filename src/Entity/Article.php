@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
 * @Entity
@@ -13,7 +15,7 @@ class Article {
 	* @Id
 	* @GeneratedValue
 	*/
-	private $id;
+	private  $id;
 	/**
 	* @Column(type="string")
 	*/
@@ -34,11 +36,21 @@ class Article {
 	* @Column(type="datetime")
 	*/
 	private $published;
-	
 	/**
 	* @ManyToOne(targetEntity="Author", inversedBy="articles")
 	*/
 	private $author;
+	/**
+	* @ManyToMany(targetEntity="Tag", cascade={"persist"})
+	* @JoinTable(name="article_tags")
+	* @JoinColumn(referencedColumnName="id", nullable=false)
+	*/
+
+	private $tags;
+
+	public function __construct() {
+		$this->tags = new ArrayCollection;
+	}
 
 	public function getId(){
 		return $this->id;
@@ -84,8 +96,7 @@ class Article {
 		return $this->published;
 	}
 
-	public function setPublished(DateTime 
-		$value = null){
+	public function setPublished(DateTime $value = null){
 		$this->published = $value;
 	}
 
@@ -95,6 +106,10 @@ class Article {
 
 	public function setAuthor($value){
 		$this->author = $value;
+	}
+
+	public function getTags(){
+		return $this->tags;
 	}
 
 }
